@@ -1,6 +1,6 @@
 require 'ad-ldap/exceptions'
 
-module ActiveDirectory
+module AD
   module LDAP
 
     # descriptions: http://wiki.service-now.com/index.php?title=LDAP_Error_Codes

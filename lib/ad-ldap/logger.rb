@@ -1,12 +1,13 @@
-module ActiveDirectory
+module AD
   module LDAP
 
     # Inspired by https://github.com/tpett/perry logger
     class Logger
-      attr_accessor :logger
+      attr_accessor :logger, :silent
 
-      def initialize(logger)
-        self.logger = logger
+      def initialize(config)
+        self.logger = config.logger
+        self.silent = config.silent
       end
 
       def out(method, args, result, time)
@@ -16,7 +17,7 @@ module ActiveDirectory
         output = "  \e[#{color}]#{name}   #{message}\e[0m"
         if self.logger
           self.logger.debug(output)
-        else
+        elsif !self.silent
           puts output
         end
       end

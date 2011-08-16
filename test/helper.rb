@@ -11,3 +11,7 @@ require 'ad-ldap'
 class Assert::Context
   include Mocha::API
 end
+
+AD::LDAP.configure do |config|
+  config.silent = true
+end

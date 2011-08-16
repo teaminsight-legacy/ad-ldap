@@ -60,7 +60,7 @@ module AD
 
       def check_operation
         check = self.get_operation_result
-        ActiveDirectory::LDAP::Response.new(check.code, check.message).handle!
+        AD::LDAP::Response.new(check.code, check.message).handle!
       end
 
     end

@@ -4,9 +4,7 @@ A small wrapper to Net::LDAP to provide some extended functionality and utility.
 
 h2. Description
 
-AD::LDAP is a small wrapper to the Net::LDAP library. Net::LDAP provides a nice low-level interface
-for interacting with an LDAP server. AD::LDAP simply wraps that interface and provides some
-extended functionality through:
+AD::LDAP is a small wrapper to the Net::LDAP library. Net::LDAP provides a nice low-level interface for interacting with an LDAP server. AD::LDAP simply wraps that interface and provides some extended functionality through:
 
 * Built-in logging of any communication with the LDAP server
 * Easier use of net-ldap's search

@@ -1,12 +1,14 @@
 require 'net/ldap'
 
-module ActiveDirectory
+module AD
   module LDAP
 
     class SearchArgs < Hash
 
-      LDAP_KEYS = [ :base, :filter, :attributes, :return_result, :attributes_only,
-        :scope, :size ]
+      LDAP_KEYS = [
+        :base, :filter, :attributes, :return_result, :attributes_only,
+        :scope, :size
+      ]
 
       def initialize(args)
         super()
@@ -29,8 +31,8 @@ module ActiveDirectory
         conditions.inject(nil) do |filters, (key, value)|
           field, operator = key.to_s.split("__")
           operator ||= "eq"
-          if attribute = ActiveDirectory.config.attributes[field.to_sym]
-            field = (attribute.ldap_name || field)
+          if mapping = AD::LDAP.config.mappings[field.to_sym]
+            field = (mapping || field)
           end
           filter = ::Net::LDAP::Filter.send(operator, field, value)
           filters ? ::Net::LDAP::Filter.join(filters, filter) : filter

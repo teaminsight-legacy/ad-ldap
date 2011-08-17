@@ -1,33 +1,35 @@
-h1. AD::LDAP
+# AD::LDAP
 
 A small wrapper to Net::LDAP to provide some extended functionality and utility.
 
-h2. Description
+## Description
 
 AD::LDAP is a small wrapper to the Net::LDAP library. Net::LDAP provides a nice low-level interface for interacting with an LDAP server. AD::LDAP simply wraps that interface and provides some extended functionality through:
 
 * Built-in logging of any communication with the LDAP server
 * Easier searching
 
-h2. Installation
+## Installation
 
     gem install ad-ldap
 
-h2. Usage
+## Usage
 
 First, you need to configure the gem:
 
-    AD::LDAP.configure do |config|
-      config.host = "127.0.0.1"
-      config.port = 389
-      config.base = "DC=mydomain, DC=com"
-      config.encrytion = :simple_tls
-      config.logger = Rails.logger
-    end
+```ruby
+AD::LDAP.configure do |config|
+  config.host = "127.0.0.1"
+  config.port = 389
+  config.base = "DC=mydomain, DC=com"
+  config.encrytion = :simple_tls
+  config.logger = Rails.logger
+end
+```
 
 Then you can start running LDAP commands like you would with Net::LDAP.
 
-<code>
+```ruby
 # logs your search and returns a collection of matching Net::LDAP::Entry
 AD::LDAP.search({
   :base => "DC=Users, DC=mydomain, DC=com",
@@ -43,11 +45,11 @@ AD::LDAP.add({
 # some are slightly modified though
 AD::LDAP.delete("DN=collin, DC=Users, DC=mydomain, DC=com")
 # instead of: AD::LDAP.delete({ :dn => "DN=collin, DC=Users, DC=mydomain, DC=com })
-</code>
+```
 
 The biggest feature of AD::LDAP is some of the conventions when using the search method. If I don't provide a filter and have extra keys not supported by net-ldap's search, these are converted to filters automatically for me:
 
-<code>
+```ruby
 # searching for an object named "collin"
 AD::LDAP.search({ :name__eq => "collin" })
 
@@ -62,11 +64,11 @@ name_filter = Net::LDAP::Filter.eq("name", "collin*")
 class_filter = Net::LDAP::Filter.eq("objectclass", "user")
 filters = name_filter | class_filter
 AD::LDAP.search({ :filter => filters, :size => 1 })
-</code>
+```
 
 Finally, because the LDAP names for most fields are not very ruby-ish (are all one word) it's sometimes convenient to setup mappings from a more ruby friendly name to a LDAP name:
 
-<code>
+```ruby
 AD::LDAP.configure do |config|
   # ... use previous config here
   config.mapppings = {
@@ -79,9 +81,9 @@ AD::LDAP.search({ :login => "jcredding" })
 
 # which is equivalent to
 AD::LDAP.search({ :samaccountname => "jcredding" })
-</code>
+```
 
-h2. License
+## License
 
 Copyright (c) 2011 Collin Redding, and Team Insight
 

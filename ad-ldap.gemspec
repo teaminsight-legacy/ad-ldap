@@ -5,11 +5,10 @@ require "ad-ldap/version"
 Gem::Specification.new do |s|
   s.name        = "ad-ldap"
   s.version     = AD::LDAP::VERSION
-  s.authors     = ["jcredding"]
-  s.email       = ["TempestTTU@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ["Collin Redding"]
+  s.homepage    = "http://github.com/teaminsight/ad-ldap"
+  s.summary     = %q{A small wrapper to Net::LDAP to provide some extended functionality and utility.}
+  s.description = %q{A small wrapper to Net::LDAP to provide some extended functionality and utility.}
 
   s.rubyforge_project = "ad-ldap"
 
@@ -18,8 +17,8 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  # specify any dependencies here; for example:
-  s.add_runtime_dependency "net-ldap"
-  
-  s.add_development_dependency "mocha"
+  s.add_runtime_dependency "net-ldap" "~>0.2.2"
+
+  s.add_development_dependency "assert" #TODO: lock the version of assert
+  s.add_development_dependency "mocha", "=0.9.12"
 end

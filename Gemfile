@@ -4,4 +4,3 @@ source "http://rubygems.org"
 gemspec
 
 gem 'rake', '~>0.9.2'
-gem "assert", :path => "~/Projects/work/gems/assert"

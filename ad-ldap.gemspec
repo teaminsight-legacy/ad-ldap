@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_runtime_dependency "net-ldap" "~>0.2.2"
+  s.add_runtime_dependency "net-ldap", "~>0.2.2"
 
   s.add_development_dependency "assert" #TODO: lock the version of assert
   s.add_development_dependency "mocha", "=0.9.12"

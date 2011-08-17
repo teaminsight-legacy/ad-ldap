@@ -16,7 +16,5 @@ class AD::LDAP::Adapter
       assert_kind_of Net::LDAP, subject
     end
   end
-  
-  # See integration tests for more testing of the LDAP adapter
 
 end

@@ -21,7 +21,7 @@ module AD
           end
         end
         if !self[:filter] && (filters = self.build_filters(conditions))
-          self[:filter] = filters
+          self[:filter] = filters ? filters.to_s : nil
         end
       end
 

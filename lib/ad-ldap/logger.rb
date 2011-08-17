@@ -7,7 +7,7 @@ module AD
 
       def initialize(config)
         self.logger = config.logger
-        self.silent = config.silent
+        self.silent = !!config.silent
       end
 
       def out(method, args, result, time)
@@ -24,23 +24,11 @@ module AD
 
       protected
 
-      def delete(dn)
-        self.run(:delete, { :dn => dn })
-      end
-
-      def replace_attribute(dn, field, value)
-        self.run(:replace_attribute, dn, field, value)
-      end
-
-      def delete_attribute(dn, field)
-        self.run(:delete_attribute, dn, field)
-      end
-
       def generate_message(method, args)
         case(method.to_sym)
         when :replace_attribute
           dn, field, value = args
-          "#{method}(#{dn.inspect}, #{field.inspect}, #{self.filter_value(value, field)})"
+          "#{method}(#{dn.inspect}, #{field.inspect}, #{self.filter_value(value, field).inspect})"
         when :delete_attribute
           dn, field = args
           "#{method}(#{dn.inspect}, #{field.inspect})"
@@ -57,11 +45,11 @@ module AD
         end).inspect
       end
       def filter_value(value, key)
-        case(key)
+        case(key.to_s)
         when *FILTERED
           "[FILTERED]"
         else
-          value.to_s
+          value
         end
       end
 

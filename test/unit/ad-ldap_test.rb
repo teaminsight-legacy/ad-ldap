@@ -1,8 +1,8 @@
 require 'assert'
 
-module AD
+module AD::LDAP
 
-  class LDAPTest < Assert::Context
+  class BaseTest < Assert::Context
     desc "the module AD::LDAP"
     setup do
       @module = AD::LDAP.dup
@@ -56,7 +56,7 @@ module AD
 
   end
 
-  class BindAsTest < AD::LDAPTest
+  class BindAsTest < AD::LDAP::BaseTest
     desc "bind_as method"
 
     should "call the run method with net-ldap args" do
@@ -76,7 +76,7 @@ module AD
 
   end
 
-  class RunTest < AD::LDAPTest
+  class RunTest < AD::LDAP::BaseTest
     desc "run method"
     setup do
       mock_config = mock()
@@ -100,7 +100,7 @@ module AD
 
   end
 
-  class RunSearchTest < AD::LDAPTest
+  class RunSearchTest < AD::LDAP::BaseTest
     desc "run_search method"
     setup do
       @args = { :size => 2, :name => "something" }
@@ -121,7 +121,7 @@ module AD
     end
   end
 
-  class ConfigureTest < AD::LDAPTest
+  class ConfigureTest < AD::LDAP::BaseTest
     desc "configure method"
     setup do
       AD::LDAP.configure do |config|

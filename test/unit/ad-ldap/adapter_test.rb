@@ -1,8 +1,8 @@
 require 'assert'
 
-module AD::LDAP
+class AD::LDAP::Adapter
 
-  class AdapterTest < Assert::Context
+  class BaseTest < Assert::Context
     desc "the AD::LDAP::Adapter class"
     setup do
       @adapter = AD::LDAP::Adapter.new(AD::LDAP.config)
@@ -16,5 +16,7 @@ module AD::LDAP
       assert_kind_of Net::LDAP, subject
     end
   end
+  
+  # See integration tests for more testing of the LDAP adapter
 
 end

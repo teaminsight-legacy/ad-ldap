@@ -17,7 +17,7 @@ module AD
           :encryption => self.config.encryption
         })
         if self.config.auth
-          self.auth(self.config.auth.username, self.config.auth.password)
+          self.auth(self.config.auth[:username], self.config.auth[:password])
         end
       end
 

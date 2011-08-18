@@ -13,7 +13,7 @@ module AD::LDAP
       :search, :bind_as
     ].each do |method|
       should "respond to ##{method}" do
-        assert_respond_to subject, method
+        assert_respond_to method, subject
       end
     end
 

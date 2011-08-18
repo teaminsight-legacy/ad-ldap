@@ -1,6 +1,8 @@
-module AD::LDAP
+module AD
+  module LDAP
 
-  class Error < StandardError
+    class Error < StandardError
+    end
+
   end
-
 end

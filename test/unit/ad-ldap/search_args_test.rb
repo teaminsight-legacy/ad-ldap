@@ -5,12 +5,16 @@ class AD::LDAP::SearchArgs
   class BaseTest < Assert::Context
     desc "the AD::LDAP::SearchArgs class"
     setup do
+      AD::LDAP.config.treebase = @treebase = "DC=example, DC=com"
       @search_args = AD::LDAP::SearchArgs.new({})
     end
     subject{ @search_args }
     
     should "be a kind of Hash" do
       assert_kind_of Hash, subject
+    end
+    should "set the base to the configured value for AD::LDAP" do
+      assert_equal @treebase, subject[:base]
     end
   end
   
@@ -75,7 +79,7 @@ class AD::LDAP::SearchArgs
       @original = { :dn => "something", :objectclass => "top" }
       first_filter = Net::LDAP::Filter.eq(:dn, @original[:dn])
       second_filter = Net::LDAP::Filter.eq(:objectclass, @original[:objectclass])
-      @expected_filter = Net::LDAP::Filter.join(second_filter, first_filter)
+      @expected_filter = Net::LDAP::Filter.join(first_filter, second_filter)
       @search_args = AD::LDAP::SearchArgs.new(@original)
     end
     subject{ @search_args }

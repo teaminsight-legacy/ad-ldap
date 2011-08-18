@@ -20,6 +20,9 @@ module AD
             conditions[key.to_sym] = value
           end
         end
+        if !self[:base]
+          self[:base] = AD::LDAP.config.treebase
+        end
         if !self[:filter] && (filters = self.build_filters(conditions))
           self[:filter] = filters ? filters.to_s : nil
         end

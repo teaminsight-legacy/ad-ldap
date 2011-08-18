@@ -14,7 +14,7 @@ module AD
         color = "4;32;1"
         name = "%s (%.1fms)" % [ "LDAP", time ]
         message = self.generate_message(method, args)
-        output = "  \e[#{color}]#{name}   #{message}\e[0m"
+        output = "  \e[#{color}m#{name}   #{message}\e[0m"
         if self.logger
           self.logger.debug(output)
         elsif !self.silent

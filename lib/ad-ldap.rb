@@ -80,7 +80,7 @@ module AD
       # Inspired by https://github.com/tpett/perry logger
       def run(method, *args)
         result, time = [ nil, -1 ]
-        if self.config.run_commands
+        if self.config.run_commands || method == :search
           time = (Benchmark.measure do
             result = self.adapter.send(method, *args)
           end).real

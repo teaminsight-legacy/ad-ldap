@@ -13,7 +13,7 @@ module AD
         super({
           :host => self.config.host,
           :port => self.config.port,
-          :base => self.config.base,
+          :base => self.config.treebase,
           :encryption => self.config.encryption
         })
         if self.config.auth

@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "net-ldap", "~>0.2.2"
 
-  s.add_development_dependency "assert",  "=0.2.0"
+  s.add_development_dependency "assert",  "~>0.2.0"
   s.add_development_dependency "mocha",   "=0.9.12"
 end

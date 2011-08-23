@@ -70,7 +70,7 @@ module AD
           size = search_args.delete(:size)
         end
         results = (self.run(:search, search_args) || [])
-        if !self.config.search_size_supported && size && results.kind_of?(Array)
+        if !self.config.search_size_supported && size
           results[0..(size.to_i - 1)]
         else
           results

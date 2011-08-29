@@ -31,7 +31,7 @@ module AD
       protected
 
       def build_filters(conditions = {})
-        conditions.inject(nil) do |filters, (key, value)|
+        conditions.sort_by{|(key, value)| key.to_s }.inject(nil) do |filters, (key, value)|
           field, operator = key.to_s.split("__")
           operator ||= "eq"
           if mapping = AD::LDAP.config.mappings[field.to_sym]

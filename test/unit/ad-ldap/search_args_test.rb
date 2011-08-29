@@ -1,7 +1,7 @@
 require 'assert'
 
 class AD::LDAP::SearchArgs
-  
+
   class BaseTest < Assert::Context
     desc "the AD::LDAP::SearchArgs class"
     setup do
@@ -9,7 +9,7 @@ class AD::LDAP::SearchArgs
       @search_args = AD::LDAP::SearchArgs.new({})
     end
     subject{ @search_args }
-    
+
     should "be a kind of Hash" do
       assert_kind_of Hash, subject
     end
@@ -17,7 +17,7 @@ class AD::LDAP::SearchArgs
       assert_equal @treebase, subject[:base]
     end
   end
-  
+
   class WithOnlyLDAPKeysTest < Assert::Context
     desc "the AD::LDAP::SearchArgs initialized with only net-ldap keys"
     setup do
@@ -28,14 +28,14 @@ class AD::LDAP::SearchArgs
       @search_args = AD::LDAP::SearchArgs.new(@original)
     end
     subject{ @search_args }
-    
+
     should "not alter the hash passed to it" do
       @original.each do |key, value|
         assert_equal value, @search_args[key]
       end
     end
   end
-  
+
   class WithNonLDAPKeysTest < Assert::Context
     desc "the AD::LDAP::SearchArgs initialized with non net-ldap keys"
     setup do
@@ -47,13 +47,13 @@ class AD::LDAP::SearchArgs
       @search_args = AD::LDAP::SearchArgs.new(@original)
     end
     subject{ @search_args }
-    
+
     should "set the filter based off the non net-ldap keys" do
       assert_equal @original[:base], subject[:base]
       assert_equal @expected_filter.to_s, subject[:filter].to_s
     end
   end
-  
+
   class WithMappingsTest < Assert::Context
     desc "search args with a mapping filter"
     setup do
@@ -63,16 +63,16 @@ class AD::LDAP::SearchArgs
       @search_args = AD::LDAP::SearchArgs.new(@original)
     end
     subject{ @search_args }
-    
+
     should "use the mapping for the field" do
       assert_equal @expected_filter.to_s, subject[:filter].to_s
     end
-    
+
     teardown do
       AD::LDAP.config.mappings = {}
     end
   end
-  
+
   class WithMultipleFiltersTest < Assert::Context
     desc "search args with a multiple filters"
     setup do
@@ -83,12 +83,12 @@ class AD::LDAP::SearchArgs
       @search_args = AD::LDAP::SearchArgs.new(@original)
     end
     subject{ @search_args }
-    
+
     should "join the filters together" do
       assert_equal @expected_filter.to_s, subject[:filter].to_s
     end
   end
-  
+
   class WithEqualFilterTest < Assert::Context
     desc "search args with a equal filter"
     setup do
@@ -97,12 +97,12 @@ class AD::LDAP::SearchArgs
       @search_args = AD::LDAP::SearchArgs.new(@original)
     end
     subject{ @search_args }
-    
+
     should "create an equal filter for the field" do
       assert_equal @expected_filter.to_s, subject[:filter].to_s
     end
   end
-  
+
   class WithNotEqualFilterTest < Assert::Context
     desc "search args with a not equal filter"
     setup do
@@ -111,12 +111,12 @@ class AD::LDAP::SearchArgs
       @search_args = AD::LDAP::SearchArgs.new(@original)
     end
     subject{ @search_args }
-    
+
     should "create a not equal filter for the field" do
       assert_equal @expected_filter.to_s, subject[:filter].to_s
     end
   end
-  
+
   class WithGreaterThanOrEqualFilterTest < Assert::Context
     desc "search args with a greater than or equal filter"
     setup do
@@ -125,12 +125,12 @@ class AD::LDAP::SearchArgs
       @search_args = AD::LDAP::SearchArgs.new(@original)
     end
     subject{ @search_args }
-    
+
     should "create a greater than or equal filter for the field" do
       assert_equal @expected_filter.to_s, subject[:filter].to_s
     end
   end
-  
+
   class WithLessThanOrEqualFilterTest < Assert::Context
     desc "search args with a less than or equal filter"
     setup do
@@ -139,10 +139,10 @@ class AD::LDAP::SearchArgs
       @search_args = AD::LDAP::SearchArgs.new(@original)
     end
     subject{ @search_args }
-    
+
     should "create a less than or equal filter for the field" do
       assert_equal @expected_filter.to_s, subject[:filter].to_s
     end
   end
-  
+
 end
